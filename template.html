@@ -20,47 +20,45 @@
     <main class="container">
         <section class="row justify-content-around mt-5">
             <div class="col-12 col-sm-6 col-lg-4 mb-3">
-                <div class="card border-primary mb-3" style="width: 18rem;">
+                <div class="card border-primary mb-3 h-100" style="width: 18rem;">
                     <div class="card-body">
-                        <h3 class="card-title">Name</h3>
-                        <h5 class="card-text">Manager</h5>
+                        <h3 class="card-title">${manager.getName()}</h3>
+                        <h5 class="card-text">${manager.getRole()}</h5>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">ID</li>
-                        <li class="list-group-item">Email</li>
-                        <li class="list-group-item">office number</li>
+                        <li class="list-group-item">ID: ${manager.getId()}</li>
+                        <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
+                        <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
                     </ul>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-lg-4 mb-3">
-                <div class="card border-primary mb-3" style="width: 18rem;">
+                <div class="card border-primary mb-3 h-100" style="width: 18rem;">
                     <div class="card-body">
-                        <h3 class="card-title">Name</h3>
-                        <h5 class="card-text">Engineer</h5>
+                        <h3 class="card-title">${engineer.getName()}</h3>
+                        <h5 class="card-text">${engineer.getRole()}</h5>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">ID</li>
-                        <li class="list-group-item">Email</li>
-                        <li class="list-group-item">gitHub User</li>
+                        <li class="list-group-item">ID: ${engineer.getId()}</li>
+                        <li class="list-group-item"> Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+                        <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.getGithub()}" target="_blank" rel="noopener noreferrer">${engineer.getGithub()}</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-lg-4 mb-3">
-                <div class="card border-primary mb-3" style="width: 18rem;">
+                <div class="card border-primary mb-3 h-100" style="width: 18rem;">
                     <div class="card-body">
-                        <h3 class="card-title">Name</h3>
-                        <h5 class="card-text">Intern</h5>
+                        <h3 class="card-title">${intern.getName()}</h3>
+                        <h5 class="card-text">${intern.getRole()}</h5>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">ID</li>
-                        <li class="list-group-item">Email</li>
-                        <li class="list-group-item">School</li>
+                        <li class="list-group-item">ID: ${intern.getId()}</li>
+                        <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${intern.getEmail()}</a></li>
+                        <li class="list-group-item">School: ${intern.getSchool()}</li>
                     </ul>
                 </div>
             </div>
         </section>
-
-
     </main>
 </body>
 
