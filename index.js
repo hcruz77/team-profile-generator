@@ -66,6 +66,9 @@ function createMenu() {
             "finish building team"
         ],
         name: 'options'
+    }
+    ]).then((choice) => {
+        const menu =  
 
 }
 
