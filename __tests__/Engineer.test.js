@@ -11,4 +11,4 @@ test("Can get Engineer github using Engineer.getGithub()", () => {
     expect(e.getGithub()).toBe(github);
 });
 
-// Refer to engineer test in order to build manager and intern tests
+
