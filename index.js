@@ -67,10 +67,22 @@ function createMenu() {
         ],
         name: 'options'
     }
-    ]).then((choice) => {
-        const menu =  
+    ]).then((data) => {
+        let options = userAnswer;
+        if(userAnswer = "add an Engineer") {
+            createEngineer();
+        if(userAnswer = "add an Intern") {
+            createIntern();
+        } else { 
+            team.push(options);
+         writeToFile('./dist/team.html', pageTemplate(team, data));
+        }
+
+        }
+        })
 
 }
+createMenu();
 
 
 
