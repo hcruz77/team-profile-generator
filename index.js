@@ -9,11 +9,11 @@ const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
 const pageTemplate = require('./src/page-template');
 
-function writeToFile(fileName, userInput) {
-    fs.writeFile(fileName, userInput, (err) => {
-        err ? console.error(err) : console.log('Your team profile is ready');
-    });
-}
+//function writeToFile(fileName, userInput) {
+//    fs.writeFile(fileName, userInput, (err) => {
+//        err ? console.error(err) : console.log('Your team profile is ready');
+//    });
+//}
 
 const team = [];
 
@@ -68,10 +68,10 @@ function createMenu() {
         name: 'options'
     }
     ]).then((data) => {
-        let options = userAnswer;
-        if(userAnswer = "add an Engineer") {
+        let options = data.options;
+        if(options = "add an Engineer") {
             createEngineer();
-        if(userAnswer = "add an Intern") {
+        if(options = "add an Intern") {
             createIntern();
         } else { 
             team.push(options);
@@ -119,7 +119,7 @@ function createEngineer() {
         writeToFile('./dist/team.html', pageTemplate(team, data));
     })
 }
-createEngineer();
+//createEngineer();
 
 function createIntern() {
     inquirer.prompt([
@@ -154,7 +154,7 @@ function createIntern() {
         writeToFile('./dist/team.html', pageTemplate(team, data));
     });
 }
-createIntern();
+//createIntern();
 
 
 //Prompt for if they want to add more employees or not
