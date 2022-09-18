@@ -10,17 +10,17 @@ const generateTeam = require('./src/page-template');
 const generateManager = require('./src/page-template');
 const generateEngineer = require('./src/page-template');
 const generateIntern = require('./src/page-template');
-function writeToFile(fileName, userInput) {
-    fs.writeFile(fileName, userInput, (err) => {
-        err ? console.error(err) : console.log('Your team profile is ready');
-    });
- }
+//function writeToFile(fileName, userInput) {
+//    fs.writeFile(fileName, userInput, (err) => {
+//        err ? console.error(err) : console.log('Your team profile is ready');
+//    });
+// }
 
 const team = [];
 
 
 const createManager = [
-    
+
     {
         type: 'input',
         message: "What is the manager's name?",
@@ -47,12 +47,12 @@ const createMenu = [
 
     {
         type: 'list',
-        message: "Please choose an option using arrow keys",
+        message: "Please choose an option using arrow keys then press enter",
         choices: [
-            "Provide Manager information",
-            "add an Engineer",
-            "add an Intern",
-            "finish building team"
+            "select to provide Manager information, press enter",
+            "select to add an Engineer, press enter",
+            "select to add an Intern, press enter",
+            "select to finish building team, press enter"
         ],
         name: 'options'
     },
@@ -112,55 +112,66 @@ function menuQuestions() {
     inquirer.prompt(createMenu)
         .then(function ({ options }) {
             switch (options) {
-                case "Provide Manager information":
+                case "select to provide Manager information, press enter":
                     managerQuestions();
                     break;
-                case "add an Engineer":
+                case "select to add an Engineer, press enter":
                     engineerQuestions();
                     break;
-                case "add an Intern":
+                case "select to add an Intern, press enter":
                     internQuestions();
                     break;
-                default: "finish building team"
-                
+                default: "select to finish building team, press enter"
+                //const complete = generateTeam(team)
+                //    console.log(complete)
+                //    console.log(team)
+
+                    fs.writeFile('./dist/team.html', generateTeam(team, (err) => {
+                        err ? console.error(err) : console.log('Your team profile is ready');
+                    }));
             }
+
         })
 }
 
+
 function managerQuestions() {
     inquirer.prompt(createManager)
-        .then(function ({managerName, managerId, managerEmail, managerOfficeNumber}) {
+        .then(function ({ managerName, managerId, managerEmail, managerOfficeNumber }) {
             team.push(Manager)
             menuQuestions();
-            
+
 
         })
-    }
-    function engineerQuestions() {
-        inquirer.prompt(createEngineer)
-            .then(function ({engineerName, engineerId, engineerEmail, engineerGithub}) {
-                team.push(Engineer)
-                menuQuestions();
-    
-            })
-        }
-        function internQuestions() {
-            inquirer.prompt(createIntern)
-                .then(function ({internName, internId, internEmail, internSchool}) {
-                    team.push(Intern)
-                    menuQuestions();
-        
-                })
-            }
+}
+function engineerQuestions() {
+    inquirer.prompt(createEngineer)
+        .then(function ({ engineerName, engineerId, engineerEmail, engineerGithub }) {
+            team.push(Engineer)
+            menuQuestions();
+
+        })
+}
+function internQuestions() {
+    inquirer.prompt(createIntern)
+        .then(function ({ internName, internId, internEmail, internSchool }) {
+            team.push(Intern)
+            menuQuestions();
+
+        })
+}
 
 
-    function init() {
-        menuQuestions()
-        writeToFile('./dist/team.html', generateTeam(team));
-        writeToFile('./dist/team.html', generateManager(team));
-    }
+function init() {
+    menuQuestions()
+    //const complete = generateTeam(team)
+    //console.log(complete)
+    //writeToFile('./dist/team.html', generateTeam(team;
 
-    init();
+}
+
+
+init();
 
 
    // console.log(team);
