@@ -122,17 +122,16 @@ function menuQuestions() {
                     internQuestions();
                     break;
                 default: "select to finish building team, press enter"
-                //const complete = generateTeam(team)
-                //    console.log(complete)
-                //    console.log(team)
+            
+                
+                  
 
-                    fs.writeFile('./dist/team.html', generateTeam(team, (err) => {
-                        err ? console.error(err) : console.log('Your team profile is ready');
-                    }));
             }
-
         })
-}
+    }
+
+
+
 
 
 function managerQuestions() {
@@ -144,14 +143,17 @@ function managerQuestions() {
 
         })
 }
+
 function engineerQuestions() {
     inquirer.prompt(createEngineer)
         .then(function ({ engineerName, engineerId, engineerEmail, engineerGithub }) {
             team.push(Engineer)
+
             menuQuestions();
 
         })
 }
+
 function internQuestions() {
     inquirer.prompt(createIntern)
         .then(function ({ internName, internId, internEmail, internSchool }) {
@@ -164,18 +166,14 @@ function internQuestions() {
 
 function init() {
     menuQuestions()
-    //const complete = generateTeam(team)
-    //console.log(complete)
-    //writeToFile('./dist/team.html', generateTeam(team;
+  
 
 }
 
 
 init();
 
-
-   // console.log(team);
-    //writeToFile('./dist/team.html', generateTeam(team));
+//console.log('Your team profile is ready');
 
 
         //Prompt for if they want to add more employees or not

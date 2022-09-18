@@ -62,16 +62,16 @@ const generateTeam = team => {
     const html = [];
 
     html.push(team
-        .filter(employee => employee.getRole() === "Manager")
+        .filter(employee => employee === "Manager")
         .map(manager => generateManager(manager))
     );
     html.push(team
-        .filter(employee => employee.getRole() === "Engineer")
+        .filter(employee => employee === "Engineer")
         .map(engineer => generateEngineer(engineer))
         .join("")
     );
     html.push(team
-        .filter(employee => employee.getRole() === "Intern")
+        .filter(employee => employee === "Intern")
         .map(intern => generateIntern(intern))
         .join("")
     );
@@ -111,3 +111,4 @@ module.exports = team => {
 </html>
     `;
 };
+module.exports = generateTeam;
