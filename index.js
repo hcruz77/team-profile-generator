@@ -1,23 +1,26 @@
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-
+const Employee = require('./lib/Employee');
 
 // TODO: CODE GOES HERE
 const fs = require('fs');
 const inquirer = require('inquirer');
-const generateTeam = require('./src/page-template')
-//function writeToFile(fileName, userInput) {
-//    fs.writeFile(fileName, userInput, (err) => {
-//        err ? console.error(err) : console.log('Your team profile is ready');
-//    });
-//}
+const generateTeam = require('./src/page-template');
+const generateManager = require('./src/page-template');
+const generateEngineer = require('./src/page-template');
+const generateIntern = require('./src/page-template');
+function writeToFile(fileName, userInput) {
+    fs.writeFile(fileName, userInput, (err) => {
+        err ? console.error(err) : console.log('Your team profile is ready');
+    });
+ }
 
 const team = [];
 
 
 const createManager = [
-    //inquirer.prompt([
+    
     {
         type: 'input',
         message: "What is the manager's name?",
@@ -39,20 +42,6 @@ const createManager = [
         name: 'managerOfficeNumber',
     },
 ]
-// .then((data) => {
-//    const manager = new Manager(
-//     data.managerName,
-//     data.managerId,
-//     data.managerEmail,
-//     data.managerOfficeNumber
-//   //  )
-//
-//
-//  team.push(manager);
-//writeToFile('./dist/team.html', pageTemplate(team, data));
-
-
-//createManager();
 
 const createMenu = [
 
@@ -69,36 +58,7 @@ const createMenu = [
     },
 ]
 
-//.then((options) => {
-//  switch (options) {
-//      case "add an Engineer":
-//          createEngineer();
-//          break;
-//      case "add an Intern":
-//          createIntern();
-//          break;
-//      default: "finish building team"
-//          fs.writeToFile('./dist/team.html', pageTemplate(team, data));
-//
-//
-//  }
 
-//createMenu();
-
-
-
-//  let options = data.options;
-//  if(options = "add an Engineer") {
-//      createEngineer();
-//  if(options = "add an Intern") {
-//      createIntern();
-//  } else { 
-//      team.push(options);
-//   writeToFile('./dist/team.html', pageTemplate(team, data));
-//  }
-//
-//  }
-//})
 
 const createEngineer = [
 
@@ -123,21 +83,9 @@ const createEngineer = [
         name: 'engineerGithub'
     },
 ]
-//.then((data) => {
-// const engineer = new Engineer(
-//     data.engineerName,
-//     data.engineerId,
-//     data.engineerEmail,
-//     data.engineerGithub
-// )
-// team.push(engineer);
-// writeToFile('./dist/team.html', pageTemplate(team, data));
 
-
-//createEngineer();
 
 const createIntern = [
-    //inquirer.prompt([
     {
         type: 'input',
         message: "What is the intern's name?",
@@ -159,16 +107,6 @@ const createIntern = [
         name: 'internSchool'
     },
 ]
-// ]).then((data) => {
-//     const intern = new Intern(
-//         data.internName,
-//         data.internId,
-//         data.internEmail,
-//         data.internSchool
-//     )
-//     team.push(intern);
-//     writeToFile('./dist/team.html', pageTemplate(team, data));
-// });
 
 function menuQuestions() {
     inquirer.prompt(createMenu)
@@ -184,30 +122,49 @@ function menuQuestions() {
                     internQuestions();
                     break;
                 default: "finish building team"
-                    fs.writeToFile('./dist/team.html', generateTeam(team, data));
+                
             }
         })
 }
 
 function managerQuestions() {
     inquirer.prompt(createManager)
-        .then(function ({ managerName, managerId, managerEmail, managerOfficeNumber }) {
+        .then(function ({managerName, managerId, managerEmail, managerOfficeNumber}) {
             team.push(Manager)
             menuQuestions();
+            
 
         })
     }
-
+    function engineerQuestions() {
+        inquirer.prompt(createEngineer)
+            .then(function ({engineerName, engineerId, engineerEmail, engineerGithub}) {
+                team.push(Engineer)
+                menuQuestions();
+    
+            })
+        }
+        function internQuestions() {
+            inquirer.prompt(createIntern)
+                .then(function ({internName, internId, internEmail, internSchool}) {
+                    team.push(Intern)
+                    menuQuestions();
+        
+                })
+            }
 
 
     function init() {
         menuQuestions()
+        writeToFile('./dist/team.html', generateTeam(team));
+        writeToFile('./dist/team.html', generateManager(team));
     }
 
     init();
 
 
-
+   // console.log(team);
+    //writeToFile('./dist/team.html', generateTeam(team));
 
 
         //Prompt for if they want to add more employees or not
