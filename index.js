@@ -6,15 +6,7 @@ const Employee = require('./lib/Employee');
 // TODO: CODE GOES HERE
 const fs = require('fs');
 const inquirer = require('inquirer');
-const generateTeam = require('./src/page-template');
-const generateManager = require('./src/page-template');
-const generateEngineer = require('./src/page-template');
-const generateIntern = require('./src/page-template');
-//function writeToFile(fileName, userInput) {
-//    fs.writeFile(fileName, userInput, (err) => {
-//        err ? console.error(err) : console.log('Your team profile is ready');
-//    });
-// }
+const create = require('./src/page-template.js');
 
 const team = [];
 
@@ -121,52 +113,59 @@ function menuQuestions() {
                 case "select to add an Intern, press enter":
                     internQuestions();
                     break;
-                default: "select to finish building team, press enter"
-            
-                
-                  
-
+                case "select to finish building team, press enter":
+                    buildTeam();
+                    break;
             }
         })
+
+
+
+
+    function managerQuestions() {
+        inquirer.prompt(createManager)
+            .then((answers) => {
+                const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+                team.push(manager);
+                console.log(manager);
+                console.log(team);
+                menuQuestions();
+            })
     }
 
+    function engineerQuestions() {
+        inquirer.prompt(createEngineer)
+            .then((answers) => {
+                const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+                team.push(engineer);
+                console.log(engineer);
+                console.log(team);
+                menuQuestions();
+            })
+    }
 
+    function internQuestions() {
+        inquirer.prompt(createIntern)
+            .then((answers) => {
+                const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+                team.push(intern);
+                console.log(intern);
+                menuQuestions();
+            })
+    }
 
-
-
-function managerQuestions() {
-    inquirer.prompt(createManager)
-        .then(function ({ managerName, managerId, managerEmail, managerOfficeNumber }) {
-            team.push(Manager)
-            menuQuestions();
-
-
-        })
-}
-
-function engineerQuestions() {
-    inquirer.prompt(createEngineer)
-        .then(function ({ engineerName, engineerId, engineerEmail, engineerGithub }) {
-            team.push(Engineer)
-
-            menuQuestions();
-
-        })
-}
-
-function internQuestions() {
-    inquirer.prompt(createIntern)
-        .then(function ({ internName, internId, internEmail, internSchool }) {
-            team.push(Intern)
-            menuQuestions();
-
-        })
+    function buildTeam() {
+        console.log(team);
+        fs.writeFile('./dist/team.html', create(team), (err) => {
+            err ? console.error(err) : console.log('Your team profile is ready');
+        });
+    }
 }
 
 
 function init() {
     menuQuestions()
-  
+
 
 }
 

@@ -51,7 +51,7 @@ const generateTeam = team => {
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">ID: ${intern.getId()}</li>
-                        <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${intern.getEmail()}</a></li>
+                        <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
                         <li class="list-group-item">School: ${intern.getSchool()}</li>
                     </ul>
                 </div>
@@ -62,16 +62,16 @@ const generateTeam = team => {
     const html = [];
 
     html.push(team
-        .filter(employee => employee === "Manager")
+        .filter(employee => employee.getRole() === "Manager")
         .map(manager => generateManager(manager))
     );
     html.push(team
-        .filter(employee => employee === "Engineer")
+        .filter(employee => employee.getRole() === "Engineer")
         .map(engineer => generateEngineer(engineer))
         .join("")
     );
     html.push(team
-        .filter(employee => employee === "Intern")
+        .filter(employee => employee.getRole() === "Intern")
         .map(intern => generateIntern(intern))
         .join("")
     );
@@ -111,4 +111,3 @@ module.exports = team => {
 </html>
     `;
 };
-module.exports = generateTeam;
